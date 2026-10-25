@@ -1,0 +1,603 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#070b14">
+  <title>Login Website</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      background: #070b14;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 420px;
+      padding: 30px;
+      background: #111827;
+      border: 1px solid #263247;
+      border-radius: 20px;
+      box-shadow: 0 20px 60px #00000055;
+    }
+
+    .logo {
+      width: 65px;
+      height: 65px;
+      margin: 0 auto 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #ff3347;
+      border-radius: 18px;
+      font-size: 30px;
+      font-weight: bold;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 27px;
+      margin-bottom: 10px;
+    }
+
+    .subtitle {
+      text-align: center;
+      color: #9ca3af;
+      font-size: 14px;
+      line-height: 1.6;
+      margin-bottom: 25px;
+    }
+
+    .tabs {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 22px;
+    }
+
+    .tab {
+      flex: 1;
+      padding: 12px;
+      background: #070b14;
+      color: white;
+      border: 1px solid #374151;
+      border-radius: 9px;
+      cursor: pointer;
+    }
+
+    .tab.active {
+      background: #ff3347;
+      border-color: #ff3347;
+    }
+
+    .form-group {
+      margin-bottom: 18px;
+    }
+
+    label {
+      display: block;
+      font-size: 14px;
+      margin-bottom: 8px;
+      color: #e5e7eb;
+    }
+
+    .input-wrapper {
+      position: relative;
+    }
+
+    input[type="email"],
+    input[type="password"],
+    input[type="text"] {
+      width: 100%;
+      padding: 14px;
+      background: #070b14;
+      border: 1px solid #374151;
+      border-radius: 9px;
+      outline: none;
+      color: white;
+      font-size: 15px;
+    }
+
+    input:focus {
+      border-color: #ff3347;
+      box-shadow: 0 0 0 3px #ff334722;
+    }
+
+    .password-input {
+      padding-right: 65px !important;
+    }
+
+    .show-password {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      color: #ff7582;
+      cursor: pointer;
+    }
+
+    .forgot-row {
+      text-align: right;
+      margin-bottom: 20px;
+    }
+
+    .text-link {
+      color: #ff7582;
+      background: none;
+      border: none;
+      font-size: 13px;
+      cursor: pointer;
+    }
+
+    .main-button {
+      width: 100%;
+      padding: 14px;
+      background: #ff3347;
+      border: none;
+      border-radius: 9px;
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .main-button:hover {
+      background: #e51f36;
+    }
+
+    .main-button:disabled {
+      opacity: 0.6;
+      cursor: wait;
+    }
+
+    .message {
+      margin-top: 17px;
+      text-align: center;
+      font-size: 13px;
+      line-height: 1.6;
+      overflow-wrap: anywhere;
+    }
+
+    .footer {
+      text-align: center;
+      color: #9ca3af;
+      font-size: 13px;
+      margin-top: 24px;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    #dashboard {
+      display: none;
+      text-align: center;
+    }
+
+    .success-icon {
+      width: 65px;
+      height: 65px;
+      margin: 0 auto 20px;
+      background: #14532d;
+      color: #4ade80;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 30px;
+    }
+
+    .dashboard-card {
+      background: #070b14;
+      border: 1px solid #263247;
+      border-radius: 12px;
+      padding: 18px;
+      margin: 22px 0;
+      text-align: left;
+    }
+
+    .dashboard-card p {
+      color: #9ca3af;
+      font-size: 13px;
+      margin-bottom: 8px;
+    }
+
+    .dashboard-card strong {
+      overflow-wrap: anywhere;
+    }
+
+    @media (max-width: 420px) {
+      .container {
+        padding: 23px 19px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <main class="container">
+
+    <!-- LOGIN AND SIGN UP -->
+    <section id="authSection">
+
+      <div class="logo">M</div>
+
+      <h1 id="pageTitle">Welcome Back</h1>
+
+      <p class="subtitle" id="pageSubtitle">
+        Sign in to your account
+      </p>
+
+      <div class="tabs">
+        <button type="button" class="tab active" id="loginTab">
+          Login
+        </button>
+
+        <button type="button" class="tab" id="signupTab">
+          Sign Up
+        </button>
+      </div>
+
+      <form id="authForm">
+
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input
+            type="email"
+            id="email"
+            placeholder="example@gmail.com"
+            autocomplete="email"
+            required
+          >
+        </div>
+
+        <div class="form-group">
+          <label for="password">Password</label>
+
+          <div class="input-wrapper">
+            <input
+              type="password"
+              id="password"
+              class="password-input"
+              placeholder="Enter your password"
+              minlength="6"
+              autocomplete="current-password"
+              required
+            >
+
+            <button
+              type="button"
+              class="show-password"
+              id="showPassword"
+              aria-label="Show password"
+            >Show</button>
+          </div>
+        </div>
+
+        <div class="forgot-row" id="forgotRow">
+          <button type="button" class="text-link" id="forgotButton">
+            Forgot Password?
+          </button>
+        </div>
+
+        <button type="submit" class="main-button" id="submitButton">
+          Login
+        </button>
+
+        <p class="message" id="message" role="status"
+           aria-live="polite"></p>
+
+      </form>
+
+      <div class="footer">
+        Secure Login with Firebase Authentication
+      </div>
+
+    </section>
+
+    <!-- DASHBOARD -->
+    <section id="dashboard">
+
+      <div class="success-icon">✓</div>
+
+      <h1>Welcome!</h1>
+
+      <p class="subtitle">
+        You have successfully logged in.
+      </p>
+
+      <div class="dashboard-card">
+        <p>Logged-in Email</p>
+        <strong id="userEmail"></strong>
+      </div>
+
+      <button type="button" class="main-button" id="logoutButton">
+        Logout
+      </button>
+
+      <p class="message" id="dashboardMessage" role="status"></p>
+
+    </section>
+
+  </main>
+
+  <script type="module">
+
+    // FIREBASE SDK
+    import {
+      initializeApp
+    } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
+
+    import {
+      getAuth,
+      createUserWithEmailAndPassword,
+      signInWithEmailAndPassword,
+      sendPasswordResetEmail,
+      onAuthStateChanged,
+      signOut
+    } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-auth.js";
+
+
+    // FIREBASE CONFIGURATION
+    // Replace these placeholders with your actual Firebase values.
+
+    const firebaseConfig = {
+      apiKey: "YOUR_API_KEY",
+      authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+      projectId: "YOUR_PROJECT_ID",
+      storageBucket: "YOUR_STORAGE_BUCKET",
+      messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+      appId: "YOUR_APP_ID"
+    };
+
+
+    // INITIALIZE FIREBASE
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
+
+    // HTML ELEMENTS
+    const authSection = document.getElementById("authSection");
+    const dashboard = document.getElementById("dashboard");
+
+    const authForm = document.getElementById("authForm");
+    const emailInput = document.getElementById("email");
+    const passwordInput = document.getElementById("password");
+
+    const pageTitle = document.getElementById("pageTitle");
+    const pageSubtitle = document.getElementById("pageSubtitle");
+
+    const loginTab = document.getElementById("loginTab");
+    const signupTab = document.getElementById("signupTab");
+
+    const submitButton = document.getElementById("submitButton");
+    const showPassword = document.getElementById("showPassword");
+
+    const forgotButton = document.getElementById("forgotButton");
+    const forgotRow = document.getElementById("forgotRow");
+
+    const message = document.getElementById("message");
+    const dashboardMessage =
+      document.getElementById("dashboardMessage");
+
+    let mode = "login";
+
+
+    // DISPLAY MESSAGES
+    function showMessage(text, success = false) {
+      message.textContent = text;
+      message.style.color = success ? "#4ade80" : "#ff7582";
+    }
+
+
+    // FIREBASE ERROR HANDLING
+    function getErrorMessage(error) {
+      const errors = {
+        "auth/email-already-in-use":
+          "This email is already registered.",
+
+        "auth/invalid-email":
+          "Please enter a valid email address.",
+
+        "auth/weak-password":
+          "Please use a stronger password.",
+
+        "auth/invalid-credential":
+          "Incorrect email or password.",
+
+        "auth/user-not-found":
+          "No account was found for this email.",
+
+        "auth/wrong-password":
+          "Incorrect password.",
+
+        "auth/too-many-requests":
+          "Too many attempts. Please try again later.",
+
+        "auth/network-request-failed":
+          "Check your internet connection.",
+
+        "auth/operation-not-allowed":
+          "Enable Email/Password in Firebase Authentication.",
+
+        "auth/unauthorized-domain":
+          "Authorize this website domain in Firebase settings.",
+
+        "auth/invalid-api-key":
+          "Check your Firebase API key."
+      };
+
+      return errors[error.code] ||
+        "An error occurred: " + error.code;
+    }
+
+
+    // SWITCH LOGIN / SIGN UP
+    function setMode(newMode) {
+      mode = newMode;
+
+      const isSignup = mode === "signup";
+
+      pageTitle.textContent =
+        isSignup ? "Create Account" : "Welcome Back";
+
+      pageSubtitle.textContent =
+        isSignup
+          ? "Create your new account"
+          : "Sign in to your account";
+
+      submitButton.textContent =
+        isSignup ? "Create Account" : "Login";
+
+      passwordInput.autocomplete =
+        isSignup ? "new-password" : "current-password";
+
+      loginTab.classList.toggle("active", !isSignup);
+      signupTab.classList.toggle("active", isSignup);
+
+      forgotRow.classList.toggle("hidden", isSignup);
+
+      showMessage("");
+    }
+
+    loginTab.addEventListener("click", () => setMode("login"));
+    signupTab.addEventListener("click", () => setMode("signup"));
+
+
+    // SHOW / HIDE PASSWORD
+    showPassword.addEventListener("click", () => {
+      const hidden = passwordInput.type === "password";
+
+      passwordInput.type = hidden ? "text" : "password";
+      showPassword.textContent = hidden ? "Hide" : "Show";
+
+      showPassword.setAttribute(
+        "aria-label",
+        hidden ? "Hide password" : "Show password"
+      );
+    });
+
+
+    // SIGN UP AND LOGIN
+    authForm.addEventListener("submit", async (event) => {
+      event.preventDefault();
+
+      const email = emailInput.value.trim();
+      const password = passwordInput.value;
+
+      submitButton.disabled = true;
+      showMessage("Please wait...", true);
+
+      try {
+        if (mode === "signup") {
+          await createUserWithEmailAndPassword(
+            auth,
+            email,
+            password
+          );
+
+          showMessage("Account created successfully!", true);
+
+        } else {
+          await signInWithEmailAndPassword(
+            auth,
+            email,
+            password
+          );
+
+          showMessage("Login successful!", true);
+        }
+
+      } catch (error) {
+        showMessage(getErrorMessage(error));
+
+      } finally {
+        submitButton.disabled = false;
+      }
+    });
+
+
+    // FORGOT PASSWORD
+    forgotButton.addEventListener("click", async () => {
+      const email = emailInput.value.trim();
+
+      if (!email) {
+        showMessage("Please enter your email address first.");
+        emailInput.focus();
+        return;
+      }
+
+      forgotButton.disabled = true;
+
+      try {
+        await sendPasswordResetEmail(auth, email);
+
+        showMessage(
+          "If the account is eligible, a password reset email will be sent. Check your inbox.",
+          true
+        );
+
+      } catch (error) {
+        showMessage(getErrorMessage(error));
+
+      } finally {
+        forgotButton.disabled = false;
+      }
+    });
+
+
+    // LOGOUT
+    document.getElementById("logoutButton")
+      .addEventListener("click", async function () {
+        this.disabled = true;
+        dashboardMessage.textContent = "";
+
+        try {
+          await signOut(auth);
+
+        } catch (error) {
+          dashboardMessage.style.color = "#ff7582";
+          dashboardMessage.textContent = getErrorMessage(error);
+
+        } finally {
+          this.disabled = false;
+        }
+      });
+
+
+    // MONITOR AUTHENTICATION STATE
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        authSection.style.display = "none";
+        dashboard.style.display = "block";
+
+        document.getElementById("userEmail").textContent =
+          user.email || "Email unavailable";
+
+      } else {
+        dashboard.style.display = "none";
+        authSection.style.display = "block";
+      }
+    });
+
+  </script>
+
+</body>
+</html>
